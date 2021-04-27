@@ -1,5 +1,5 @@
 import axios from 'axios'
-import { useEffect } from 'react'
+import { useEffect, useState } from 'react'
 interface Props {
   url: string
 }
@@ -8,17 +8,14 @@ interface Params {
   idx?: number
 }
 
-async function getWallpaper(params?: Params) {
-  return
-}
-
-export default function Home() {
+export default function Dog() {
+  const [url,setUrl]=  useState('/loading.png')
   useEffect(() => {
     axios({
-      url: '/api/wallpaper',
+      url: '/api/dog',
       method: 'GET',
     }).then((res) => {
-      console.log(res)
+      setUrl(res.data.url)
     }).catch(err=>{
       console.error(err)
     })
@@ -26,7 +23,9 @@ export default function Home() {
   return (
     <div className="border border-gray-100">
       <div className="shadow-md h-10 leading-10	 px-5">1</div>
-      <div className="p-5"></div>
+      <div className="p-5">
+        <img src={url} alt="dog-img" />
+      </div>
     </div>
   )
 }
